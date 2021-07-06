@@ -64,12 +64,12 @@ export function printField(
 
   const strs = item.params.map(param => {
     if (param.rule === 'repeated') {
-      return `  ${param.name}: ${param.type}[];\n`;
+      return `  ${param.name}?: ${param.type}[];\n`;
     }
     if (param.keyType) {
-      return `  ${param.name}: {[key: ${param.keyType}]: ${param.type}};\n`;
+      return `  ${param.name}?: {[key: ${param.keyType}]: ${param.type}};\n`;
     }
-    return `  ${param.name}: ${param.type};\n`;
+    return `  ${param.name}?: ${param.type};\n`;
   });
 
   // if (fieldParams.nested) {
