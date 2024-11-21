@@ -2,7 +2,7 @@
 	"name": "vscode-protobuf-to-typescript",
 	"displayName": "Protobuf To Typescript",
 	"description": "Convert protobuf struct to typescript type",
-	"version": "0.0.8",
+	"version": "0.0.10",
 	"private": true,
 	"icon": "icon.png",
 	"publisher": "yishi",

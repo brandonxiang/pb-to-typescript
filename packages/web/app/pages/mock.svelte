@@ -69,6 +69,13 @@ message HelloReply {
     onProtobuf();
     new ClipboardJS('.button');
   });
+
+  window.addEventListener('message', event => {
+    const message = event.data;
+    if (message.command === 'paste') {
+      src += message.text;
+    }
+  });
 </script>
 
 <div id="container">

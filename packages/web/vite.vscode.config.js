@@ -15,7 +15,19 @@ export default defineConfig({
       inject: {
         data: {
           injectHead:
-            "<script>document.documentElement.classList.add('dark');</script>",
+            `
+            <script>
+             document.documentElement.classList.add('dark'); 
+
+             const vscode = acquireVsCodeApi();
+
+              document.addEventListener('keydown', event => {
+                if ((event.ctrlKey || event.metaKey) && event.key === 'v') {
+                  vscode.postMessage({ command: 'requestPaste' });
+                }
+              });
+            </script>
+            `,
         },
       },
     }),

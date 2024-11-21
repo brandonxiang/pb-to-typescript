@@ -63,12 +63,27 @@ function transformFromClipboard() {
 		});
 }
 
-function transformOnPanel (ctx: ExtensionContext) {
+function transformOnPanel(ctx: ExtensionContext) {
   const panel = window.createWebviewPanel(
-    'protobuf to typescript', // Identifies the type of the webview. Used internally
-    'protobuf to typescript', // Title of the panel displayed to the user
-    ViewColumn.One, // Editor column to show the new webview panel in.
-    { enableScripts: true} // Webview options. More on these later.
+    'protobuf to typescript',
+    'protobuf to typescript',
+    ViewColumn.One,
+    { 
+      enableScripts: true,
+      retainContextWhenHidden: true
+    }
+  );
+
+  // Add message handler for paste events
+  panel.webview.onDidReceiveMessage(
+    async message => {
+      if (message.command === 'requestPaste') {
+        const text = await getClipboardText();
+        panel.webview.postMessage({ command: 'paste', text });
+      }
+    },
+    undefined,
+    ctx.subscriptions
   );
 
   panel.webview.html = getWebviewContent(ctx);
